@@ -3,11 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 
 function PhotosCarousel() {
   const images = [
-    "public/assets/foto2.jpeg",
-    "public/assets/foto1.jpeg",
-    "public/assets/foto3.jpeg",
-    "public/assets/foto4.jpeg",
-    "public/assets/foto6.jpeg",
+    "/assets/foto2.jpeg",
+    "/assets/foto1.jpeg",
+    "/assets/foto3.jpeg",
+    "/assets/foto4.jpeg",
+    "/assets/foto6.jpeg",
   ];
 
   return (
