@@ -45,7 +45,7 @@ export default function HomePage() {
           >
             <Link to="/nossa-historia">
               <Button
-                className="mt-6 px-8 py-4 text-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full shadow-lg hover:scale-105 transition-all duration-300"
+                className="mt-6 px-8 py-4 text-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg shadow-lg hover:scale-105 transition-all duration-300"
               >
                 Siim
               </Button>
