@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const timeline = [
   {
@@ -32,71 +33,142 @@ const timeline = [
     text: "Lembra dessa surpresa muito bem arquitetada que te dei?? KKKK Eu lembro como se fosse ontem, um dos dias mais especiais pra mim!",
     image: "/assets/9_dezembro_2023.jpeg",
   },
+  {
+    date: "11 de Dezembro de 2023",
+    title: "Sua formatura",
+    text: "O dia que você se formou no ensino médio, foi a primeira formatura que participei, ver o brilho e a alegria no seu sorriso fez minha noite",
+    image: "/assets/11_dezembro_2023.jpeg",
+  },
+  {
+    date: "5 de Março de 2024",
+    title: "Nosso primeiro aniversário de namoro",
+    text: "Nosso primeiro aniversário de namoro, acordar com esse seu bom dia fez meu dia valer muito a pena, assim como todos os dias que passo ao seu lado",
+    image: "/assets/5_marco_2024.jpeg",
+  },
+  {
+    date: "20 de Julho de 2024",
+    title: "Nosso role no Sheriff",
+    text: "Não sei te explicar, mas esse role marcou meu ano, ver você feliz com suas batidas e cantarolando as músicas kkkk amo ver você se divertindo",
+    image: "/assets/20_julho_2024.jpeg",
+  },
+  {
+    date: "27 de Outubro de 2024",
+    title: "Prainhaa :)",
+    text: "kkkk eu nem sabia nadar e você me puxou pra dar uns mergulho, engoli água até pelo nariz, mas passar esse tempo com você e sua família foi incrível (não vejo a hora de ir denovo)",
+    image: "/assets/27_outubro_2024.jpeg",
+  },
+  {
+    date: "28 de Fevereiro de 2025",
+    title: "Você me puxou pra Praia e eu te puxei pra Minas",
+    text: "Espero que tenha gostado de ver tanto mato kkkkkkkk brincadeira, tivemos tantos momentos bons mas o que mais tá grudado na minha cabeça é você dançando com o Luque (Lupe, Duke sla) kkkkk",
+    image: "/assets/28_fevereiro_2025.jpeg",
+  },
 ];
 
 export default function OurHistory() {
+  const [timeElapsed, setTimeElapsed] = useState("");
+
+  useEffect(() => {
+    const calculateTimeElapsed = () => {
+      const startDate = new Date("2023-03-05");
+      const currentDate = new Date();
+
+      const diffTime = Math.abs(currentDate.getTime() - startDate.getTime());
+      const years = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+      const months = Math.floor(
+        (diffTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30)
+      );
+      const days = Math.floor(
+        (diffTime % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
+      );
+
+      setTimeElapsed(`${years} anos, ${months} meses e ${days} dias`);
+    };
+
+    calculateTimeElapsed();
+    const timer = setInterval(calculateTimeElapsed, 1000 * 60 * 60 * 24); // Atualiza diariamente
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-100 to-pink-200 p-6">
+    <div className="min-h-screen bg-gradient-to-b from-rose-100 via-pink-100 to-rose-200 px-4 py-8 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center"
+        className="text-center max-w-4xl mx-auto space-y-6"
       >
-        <h1 className="text-4xl font-extrabold text-pink-700">Nossa História 💖</h1>
-        <p className="mt-2 text-lg text-gray-700">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-pink-700 mb-4 tracking-tight">
+          Nossa História 💖
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-700 mb-4">
           Uma linha do tempo cheia de momentos especiais.
         </p>
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
+          <p className="text-lg text-pink-600 font-medium">
+            Estamos juntos há:
+          </p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">
+            {timeElapsed}
+          </p>
+        </div>
       </motion.div>
 
-      <div className="mt-10 space-y-12">
+      <div className="mt-12 sm:mt-16 space-y-12 sm:space-y-16 max-w-6xl mx-auto">
         {timeline.map((event, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className={`flex flex-col ${index % 2 === 0 ? "items-start" : "items-end"
-              }`}
+            className={`flex flex-col ${
+              index % 2 === 0 ? "sm:items-start" : "sm:items-end"
+            } items-center`}
           >
-            <Card className="max-w-md bg-white shadow-lg rounded-lg p-4">
-              <CardContent>
-                <h2 className="text-xl font-bold text-pink-600">{event.title}</h2>
-                <p className="text-sm text-gray-600">{event.date}</p>
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="mt-4 w-full h-100 object-cover rounded-lg shadow-md"
-                />
-                <p className="mt-4 text-gray-800">{event.text}</p>
+            <Card className="w-full sm:max-w-md bg-white/95 backdrop-blur-sm shadow-xl rounded-2xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+              <CardContent className="p-6 sm:p-8">
+                <h2 className="text-2xl font-bold text-pink-600 mb-2">
+                  {event.title}
+                </h2>
+                <p className="text-sm font-medium text-gray-600 mb-4">
+                  {event.date}
+                </p>
+                <div className="relative overflow-hidden rounded-xl">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-90 sm:h-80 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500 ease-in-out"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="mt-6 text-gray-800 text-lg leading-relaxed">
+                  {event.text}
+                </p>
               </CardContent>
             </Card>
           </motion.div>
         ))}
       </div>
 
-      <div className="mt-20 bg-white p-6 rounded-lg shadow-lg text-gray-800">
-        <h2 className="text-3xl font-bold text-pink-700">💌 Edição Especial do Nosso Jornal 💌</h2>
-        <p className="mt-4 text-lg">
-          Hoje celebramos não só um número, mas um capítulo lindo da nossa história.
-          Cada momento juntos foi um presente, e estamos apenas começando essa linda jornada.
-        </p>
-        <p className="mt-2 text-lg">
-          Obrigado(a) por ser minha melhor companhia, meu amor. Que venham muitos anos de felicidade! ❤️
-        </p>
-      </div>
-
-      <div className="mt-16 text-center">
-        <h2 className="text-3xl font-bold text-pink-700">📸 Galeria de Memórias</h2>
-        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4">
-          <img src="/assets/memoria1.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
-          <img src="/assets/memoria2.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
-          <img src="/assets/memoria3.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
-          <img src="/assets/memoria4.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
-          <img src="/assets/memoria5.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
-          <img src="/assets/memoria6.jpg" className="w-full h-40 object-cover rounded-lg shadow-md" />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="mt-16 sm:mt-20 mx-auto max-w-3xl"
+      >
+        <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
+          <p className="text-lg sm:text-xl text-gray-800 leading-relaxed">
+            Cada momento ao seu lado é uma nova página dessa história que
+            estamos escrevendo juntos. São tantas memórias especiais que não
+            caberiam em uma única página... Seu sorriso ilumina meus dias e seu
+            amor transforma minha vida. Obrigado por ser minha parceira, minha
+            confidente, minha melhor amiga e meu amor. Que nosso amor continue
+            crescendo e que possamos criar milhares de novas memórias juntos.
+            Você é o melhor presente que a vida poderia me dar! ❤️
+          </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
