@@ -1,20 +1,10 @@
 import PhotosCarousel from "@/components/PhotosCarousel";
 import { Button } from "@/components/ui/button";
-import confetti from "canvas-confetti";
+import { triggerConfetti } from "@/utils/triggerConfetti";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
 
 export default function HomePage() {
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      shapes: ["circle", "square"] as const,
-      colors: ["#FF69B4", "#FF1493", "#FF69B4", "#FF0000"],
-    });
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-rose-50 via-pink-100 to-rose-100 text-gray-800 px-4 py-10">
       <motion.div
@@ -29,9 +19,9 @@ export default function HomePage() {
           transition={{ duration: 0.8 }}
           className="text-5xl font-extrabold text-pink-700 leading-tight tracking-tight"
         >
-          730 Dias ao Seu Lado
+          Oi Minha Querubinha!!
           <motion.p
-            initial={{ scale: 0.5 }}
+            initial={{ scale: 1 }}
             animate={{ scale: 1.2 }}
             transition={{
               duration: 1,
@@ -60,11 +50,19 @@ export default function HomePage() {
           className="space-y-4 mt-8"
         >
           <p className="text-xl text-pink-600 font-bold px-4">
-            Feliz dois anos, Minha Princesa!! 💕
+            Já adiantando, FELIZ DOIS ANOS MINHA PRINCESA!! 💕
           </p>
 
           <p className="text-lg font-bold text-gray-700 px-4">
-            Quis inovar um pouco e pensei em criar esse presente pra você.
+            Esses dias estive pensando em como te agradecer por tudo que você
+            faz por mim e por nós. E como você merece um presente especial.
+          </p>
+
+          <p className="text-lg font-bold text-gray-700 px-4">
+            Então resolvi criar esse site aqui, juntei o útil ao agradável,
+            espero que você goste desse presente. Usei um pouco de criatividade
+            misturada com amor e o que eu sei fazer de melhor... codar (além de
+            te fazer a mulher mais feliz e especial desse mundo).
           </p>
         </motion.div>
 

@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import confetti from "canvas-confetti";
+import { triggerConfetti } from "@/utils/triggerConfetti";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -75,16 +75,6 @@ export default function OurHistory() {
     minutes: 0,
     seconds: 0,
   });
-
-  const triggerConfetti = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 },
-      shapes: ["circle", "square"] as const,
-      colors: ["#FF69B4", "#FF1493", "#FF69B4", "#FF0000"],
-    });
-  };
 
   useEffect(() => {
     const calculateTimeElapsed = () => {
@@ -222,14 +212,22 @@ export default function OurHistory() {
           transforma minha vida. Obrigado por ser minha parceira, minha
           confidente, minha melhor amiga e meu amor. Que nosso amor continue
           crescendo e que possamos criar milhares de novas memórias juntos. Você
-          é o melhor presente que a vida poderia me dar! ❤️
+          é o melhor presente que Deus poderia me dar! ❤️
+        </div>
+
+        <div className="relative my-8 flex items-center justify-center">
+          <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-pink-400 to-transparent"></div>
+          <div className="absolute w-12 h-12 bg-white rounded-full flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+            <span className="text-2xl">💑🏻</span>
+          </div>
         </div>
 
         <div className="p-8 transition-all duration-300 text-lg text-center font-bold text-gray-800 leading-relaxed">
-          Eu te amo muito meu bem, e tenho fé que daqui pra frente, muitas
-          coisas boas vão acontecer e que Deus estará cada vez mais presente nas
-          nossas vidas e cada vez mais irá nos preencher com seu espírito santo,
-          nos dando sabedoria, paz, plenitude e muito amor.
+          <p className="text-pink-600">Eu te amo muito meu bem</p> e tenho fé
+          que daqui pra frente, muitas coisas boas vão acontecer e que Deus
+          estará cada vez mais presente nas nossas vidas e cada vez mais irá nos
+          preencher com seu espírito santo, nos dando sabedoria, paz, plenitude
+          e muito amor.
         </div>
       </motion.div>
     </div>
