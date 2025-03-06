@@ -66,11 +66,18 @@ const timeline = [
 ];
 
 export default function OurHistory() {
-  const [timeElapsed, setTimeElapsed] = useState("");
+  const [timeElapsed, setTimeElapsed] = useState({
+    years: 0,
+    months: 0,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const calculateTimeElapsed = () => {
-      const startDate = new Date("2023-03-05");
+      const startDate = new Date("2023-03-05T00:00:00");
       const currentDate = new Date();
 
       const diffTime = Math.abs(currentDate.getTime() - startDate.getTime());
@@ -81,12 +88,17 @@ export default function OurHistory() {
       const days = Math.floor(
         (diffTime % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
       );
+      const hours = Math.floor(
+        (diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
 
-      setTimeElapsed(`${years} anos, ${months} meses e ${days} dias`);
+      setTimeElapsed({ years, months, days, hours, minutes, seconds });
     };
 
     calculateTimeElapsed();
-    const timer = setInterval(calculateTimeElapsed, 1000 * 60 * 60 * 24); // Atualiza diariamente
+    const timer = setInterval(calculateTimeElapsed, 1000);
 
     return () => clearInterval(timer);
   }, []);
@@ -102,16 +114,49 @@ export default function OurHistory() {
         <h1 className="text-4xl sm:text-5xl font-extrabold text-pink-700 mb-4 tracking-tight">
           Nossa História 💖
         </h1>
-        <p className="text-lg sm:text-xl text-gray-700 mb-4">
-          Uma linha do tempo cheia de momentos especiais.
-        </p>
+
         <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-          <p className="text-lg text-pink-600 font-medium">
+          <p className="text-lg text-pink-600 font-medium mb-4">
             Estamos juntos há:
           </p>
-          <p className="text-2xl sm:text-3xl font-bold text-gray-800 mt-2">
-            {timeElapsed}
-          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.years}
+              </span>
+              <span className="text-sm text-gray-600">Anos</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.months}
+              </span>
+              <span className="text-sm text-gray-600">Meses</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.days}
+              </span>
+              <span className="text-sm text-gray-600">Dias</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.hours}
+              </span>
+              <span className="text-sm text-gray-600">Horas</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.minutes}
+              </span>
+              <span className="text-sm text-gray-600">Minutos</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-gray-800">
+                {timeElapsed.seconds}
+              </span>
+              <span className="text-sm text-gray-600">Segundos</span>
+            </div>
+          </div>
         </div>
       </motion.div>
 
@@ -138,7 +183,7 @@ export default function OurHistory() {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-90 sm:h-80 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500 ease-in-out"
+                    className="w-full h-90 object-cover rounded-lg shadow-md hover:scale-105 transition-transform duration-500 ease-in-out"
                     loading="lazy"
                   />
                 </div>
@@ -157,16 +202,14 @@ export default function OurHistory() {
         transition={{ duration: 1 }}
         className="mt-16 sm:mt-20 mx-auto max-w-3xl"
       >
-        <div className="bg-white/90 backdrop-blur-sm p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300">
-          <p className="text-lg sm:text-xl text-gray-800 leading-relaxed">
-            Cada momento ao seu lado é uma nova página dessa história que
-            estamos escrevendo juntos. São tantas memórias especiais que não
-            caberiam em uma única página... Seu sorriso ilumina meus dias e seu
-            amor transforma minha vida. Obrigado por ser minha parceira, minha
-            confidente, minha melhor amiga e meu amor. Que nosso amor continue
-            crescendo e que possamos criar milhares de novas memórias juntos.
-            Você é o melhor presente que a vida poderia me dar! ❤️
-          </p>
+        <div className="p-8 transition-all duration-300 text-lg text-center font-bold text-gray-800 leading-relaxed">
+          Cada momento ao seu lado é uma nova página dessa história que estamos
+          escrevendo juntos. São tantas memórias especiais que não caberiam em
+          uma única página... Seu sorriso ilumina meus dias e seu amor
+          transforma minha vida. Obrigado por ser minha parceira, minha
+          confidente, minha melhor amiga e meu amor. Que nosso amor continue
+          crescendo e que possamos criar milhares de novas memórias juntos. Você
+          é o melhor presente que a vida poderia me dar! ❤️
         </div>
       </motion.div>
     </div>
