@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import confetti from "canvas-confetti";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -75,6 +76,16 @@ export default function OurHistory() {
     seconds: 0,
   });
 
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      shapes: ["circle", "square"] as const,
+      colors: ["#FF69B4", "#FF1493", "#FF69B4", "#FF0000"],
+    });
+  };
+
   useEffect(() => {
     const calculateTimeElapsed = () => {
       const startDate = new Date("2023-03-05T00:00:00");
@@ -100,11 +111,13 @@ export default function OurHistory() {
     calculateTimeElapsed();
     const timer = setInterval(calculateTimeElapsed, 1000);
 
+    triggerConfetti();
+
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-100 via-pink-100 to-rose-200 px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-pink-100 to-rose-100 px-4 py-8 sm:px-6 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -210,6 +223,13 @@ export default function OurHistory() {
           confidente, minha melhor amiga e meu amor. Que nosso amor continue
           crescendo e que possamos criar milhares de novas memórias juntos. Você
           é o melhor presente que a vida poderia me dar! ❤️
+        </div>
+
+        <div className="p-8 transition-all duration-300 text-lg text-center font-bold text-gray-800 leading-relaxed">
+          Eu te amo muito meu bem, e tenho fé que daqui pra frente, muitas
+          coisas boas vão acontecer e que Deus estará cada vez mais presente nas
+          nossas vidas e cada vez mais irá nos preencher com seu espírito santo,
+          nos dando sabedoria, paz, plenitude e muito amor.
         </div>
       </motion.div>
     </div>
